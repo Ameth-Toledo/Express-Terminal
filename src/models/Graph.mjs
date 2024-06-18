@@ -31,34 +31,34 @@ export default class Graph {
         }
         return false;
     }
-//profundiad
-dfs(startVertex, callback) {
-    if (!this.#map.has(startVertex)) {
-        return;
-    }
 
-    const visited = {};
-    const stack = [];
-    stack.push(startVertex);
+    dfs(startVertex, callback) {
+        if (!this.#map.has(startVertex)) {
+            return;
+        }
 
-    while (stack.length > 0) {
-        const currentVertex = stack.pop();
-        if (!visited[currentVertex]) {
-            callback(currentVertex);
-            visited[currentVertex] = true;
-            const neighborsLinkedList = this.#matrizAdyacencia[this.#map.get(currentVertex)];
-            let current = neighborsLinkedList.head;
-            while (current) {
-                const neighborVertex = current.value.node;
-                if (!visited[neighborVertex]) {
-                    stack.push(neighborVertex);
-                }
+        const visited = {};
+        const stack = [];
+        stack.push(startVertex);
+
+        while (stack.length > 0) {
+            const currentVertex = stack.pop();
+            if (!visited[currentVertex]) {
+                callback(currentVertex);
+                visited[currentVertex] = true;
+                const neighborsLinkedList = this.#matrizAdyacencia[this.#map.get(currentVertex)];
+                let current = neighborsLinkedList.head;
+                while (current) {
+                    const neighborVertex = current.value.node;
+                    if (!visited[neighborVertex]) {
+                        stack.push(neighborVertex);
+                    }
                 current = current.next;
             }
         }
     }
 }
-//anchura
+
 
 bfs(startVertex, callback) {
     if (!this.#map.has(startVertex)) {
@@ -121,18 +121,15 @@ dijkstra(startVertex, endVertex) {
             const neighborIndex = this.#map.get(current.value.node);
             const weight = current.value.weight;
 
-            if (distances[u] + weight < distances[neighborIndex]) {
-                distances[neighborIndex] = distances[u] + weight;
+                if (distances[u] + weight < distances[neighborIndex]) {
+                    distances[neighborIndex] = distances[u] + weight;
+                }
+                current = current.next;
             }
-            current = current.next;
-        }
+        }   
+
+        return distances[endIndex];
     }
-
-    return distances[endIndex];
-}
-
-
-
 
     getVertices() {
         return this.#map.keys();

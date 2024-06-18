@@ -31,7 +31,11 @@ btnAgregarConexion.addEventListener("click", () => {
     let peso = parseInt(document.getElementById("peso").value);
     
     if (graph.addC(terminal, destino, peso)) {
-        Swal.fire("Ruta agregada");
+        Swal.fire({
+            icon: "success",
+            title: "Exito...",
+            text: "Ruta agregada exitosamente",
+        });
     } else {
         Swal.fire({
             icon: "error",
@@ -48,7 +52,11 @@ btnRecorridoProfundidad.addEventListener("click", () => {
         imprimir.innerHTML += `${vertex} `
         console.log(vertex)
     });
-    Swal.fire("Ahora puede ver las terminales");
+    Swal.fire({
+        icon: "success",
+        title: "Exito...",
+        text: "Rutas encontradas por recorrido de profundidad",
+    });
 });
 document.addEventListener('DOMContentLoaded',()=> {
     btnRecorridoAnchura.addEventListener("click", () => {
@@ -58,7 +66,11 @@ document.addEventListener('DOMContentLoaded',()=> {
             imprimir2.innerHTML += `${vertex} `
             console.log(vertex)
         });
-        Swal.fire("Ahora puede ver las terminales");
+        Swal.fire({
+            icon: "success",
+            title: "Exito...",
+            text: "Rutas encontradas por recorrido de anchura",
+        });
     });
 });
 
@@ -79,8 +91,9 @@ btnDijstra.addEventListener("click", ()  => {
     } else {
         imprimir3.innerHTML = ` La ruta mas corta es ${distance} ` ;
         Swal.fire({
-            icon: "info",
-            text: "Ya puede ver la ruta mas corta"
-        })
+            icon: "success",
+            title: "Exito...",
+            text: "Ruta mas corta encontrada exitosamente",
+        });
     }
 });
